@@ -112,18 +112,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Install perms
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            if(!getPackageManager().canRequestPackageInstalls()){
-                Toast.makeText(getApplicationContext(), "Please enable app installation permissions, this is needed to install the modified client.", Toast.LENGTH_LONG).show();
-                startActivityForResult(new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
-                        .setData(Uri.parse(String.format("package:%s", getPackageName()))), 1);
-            }
-        }
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.REQUEST_DELETE_PACKAGES) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.REQUEST_DELETE_PACKAGES}, 1);
-        }
-
         //Storage Permission
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
@@ -174,6 +162,18 @@ public class MainActivity extends AppCompatActivity {
 
                     // Check if the modification is present
                     if (!hasMods) {
+                        // Install perms
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            if(!getPackageManager().canRequestPackageInstalls()){
+                                Toast.makeText(getApplicationContext(), "Please enable app installation permissions, this is needed to install the modified client.", Toast.LENGTH_LONG).show();
+                                startActivityForResult(new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
+                                        .setData(Uri.parse(String.format("package:%s", getPackageName()))), 1);
+                            }
+                        }
+                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.REQUEST_DELETE_PACKAGES) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.REQUEST_DELETE_PACKAGES}, 1);
+                        }
+
                         runOnUiThread(() -> {
                             status.setText("Modifying game client...");
                         });
