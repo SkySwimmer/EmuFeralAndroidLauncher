@@ -1,0 +1,206 @@
+<html>
+<head>
+    <title>EmuFeral Android Launcher - How-to: client modification</title>
+    <link rel="icon" type="image/x-icon" href="https://aerialworks.ddns.net/extra/emuferal/favicon.ico" />
+    <style>
+    a:link {
+      color: magenta;
+    }
+
+    a:visited {
+      color: purple;
+    }
+
+
+	body {
+		margin: 0px;
+		background-color: black
+	}
+
+	#particles-js {
+		width: 100%;
+		height: 100%;
+	}
+
+	#logo {
+		height: 100%;
+	}
+
+	#title {
+		position: absolute;
+		color: #d6d6d6;
+		font-size: 3vh;
+		top: calc(50% - (3vh / 2) - 1.2px);
+		padding-left: 1vh;
+		user-select: none;
+	}
+
+	#titlebar {
+		width: 100%;
+		height: 5vh;
+		border-bottom: 1px solid gray;
+		position: absolute;
+		background-color: #363636;
+	}
+
+	#titlebarcontent {
+		margin: 5px;
+		height: calc(100% - 10px);
+	}
+
+	#copyright {
+		position: absolute;
+		color: gray;
+		bottom: 1vh;
+		width: 100%;
+		text-align: center;
+		transition: 0.5s;
+		font-size: 1.4vh;
+	}
+
+	button {
+		transition: 0.5s;
+		opacity: 0.9;
+		height: 5vh;
+		font-size: 2vh;
+		background-color: #cfcfcf;
+		border: 0.4vh solid #404040;
+		margin: 0.25vh;
+		margin-top: 1.4vh;
+	}
+
+	button:hover {
+		background-color: #f5f2f2;
+		transform: rotate(6deg);
+		transition: 0.5s;
+		opacity: 1;
+	}
+
+	#contentbody {
+		opacity: 1;
+		display: none;
+	}
+
+	#box {
+		position: absolute;
+		background-color: gray;
+		height: calc(100% - 5vh - 2vh - 20vh);
+		width: 90%;
+
+		top: calc(50% - ((100% - 5vh - 2vh - 20vh) / 2));
+		left: 5%;
+
+		background-color: rgba(128, 128, 128, 0.4);
+		color: white;
+		overflow: auto;
+	}
+
+	#error {
+		opacity: 1;
+		display: none;
+		position: absolute;
+		text-align: center;
+		font-size: 2vh;
+		border: 3px solid #63094d;
+		border-radius: 25px;
+		width: 50vh;
+		height: 15vh;
+		top: calc(50% - (15vh / 2));
+		left: calc(50% - (50vh / 2));
+		background-color: #979fad;
+	}
+
+	#titleerror {
+		width: 100%;
+		font-size: 3vh;
+		border-bottom: 1px solid;
+		display: block;
+		margin-top: 0.1vh;
+	}
+
+	#labelerror {
+		display: block;
+		margin-top: 2vh;
+		font-size: 2vh;
+	}
+
+	#titleguide {
+		position: absolute;
+		padding-top: 10px;
+		padding-left: 10px;
+		font-size: 48px;
+		border-bottom: 2px solid gray;
+		padding-bottom: 10px;
+
+		width: calc(100% - 10px);
+	}
+
+	#guide {
+		position: absolute;
+		top: calc(48px + 20px + 2px + 4px);
+		margin: 5px;
+	}
+	</style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
+    </script>
+    <script>
+		function nav(dest) {
+			$("#contentbody").fadeOut(400);
+			setTimeout(() => window.location.href = dest, 400);
+		}
+		$(() => $("#contentbody").fadeIn(700));
+	</script>
+</head>
+<body>
+<div id="particles-js">
+    <div id="contentbody">
+        <div id="titlebar">
+            <div id="titlebarcontent">
+                <img src="https://aerialworks.ddns.net/extra/emuferal/emulogo_purple.png" id="logo" onclick="nav('index.html')" />
+                <a id="title" onclick="nav('https://aerialworks.ddns.net/extra/emuferal')">EmuFeral Online</a>
+            </div>
+        </div>
+        <div id="box">
+            <a id="titleguide">Installing EmuFeral on Mobile</a>
+            <br />
+            <div id="guide">
+                <br />
+                <h3>Welcome to the installation wizard of EmuFeral Online for Android!</h3>
+                Here, you will find how to get a modified client for our Fer.al server emulator.
+                <br />
+                First, you will need to download the <u>Easy Android Application Modification Toolset</u> by the AerialWorks Software Foundation
+                <br />
+                (organization that develops EmuFeral), <a href="https://aerialworks.ddns.net/extra/eaamt-latest.jar">you can download it here from our download server</a>.
+                <br />
+                <br />
+                In order to run the modification toolset jar, you will need to install Java 15 or later, we recommend
+                <br /><a href="https://adoptium.net" target="_blank">Eclipse Adoptium</a> for this. (not our software, just recommended)
+                <br />
+                <br />
+                <h3>When you have all that, you can open the modification toolset</h3>
+                After opening the modification tools, enter the following in the <u>Automatic Modification Server Path</u> box: <b><a id="host">&lt;server ip &gt;</a>/api/mod.info</b>
+                <br />
+                Click 'build modified app' and wait for it to complete.
+                <br />
+                <br />
+                <h3>Finally, install the modified application</h3>
+                After the process completes, the launcher will prompt to remove the old fer.al client, allow this.
+                <br />
+                After the old client is deleted, it will ask to install the modified client, after you install it, the game should start.
+                <br />
+                <br />
+                Thats all you need to do, enjoy!
+            </div>
+            <script>
+                document.getElementById('host').innerText = window.location.origin
+            </script>
+        </div>
+        <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+        <a id="copyright">Copyright(c) 2022 AerialWorks Technologies and AfterSpark Studios, licensed under the GPLv2 license.
+        </a>
+        <script>
+particlesJS("particles-js", {"particles":{"number":{"value":80,"density":{"enable":true,"value_area":800}},"color":{"value":"#cc34eb"},"shape":{"type":"circle","stroke":{"width":0,"color":"#000000"},"polygon":{"nb_sides":5},"image":{"src":"","width":100,"height":100}},"opacity":{"value":0.5,"random":false,"anim":{"enable":false,"speed":1,"opacity_min":0.1,"sync":false}},"size":{"value":3,"random":true,"anim":{"enable":false,"speed":40,"size_min":0.1,"sync":false}},"line_linked":{"enable":false,"distance":150,"color":"#ffffff","opacity":0.4,"width":1},"move":{"enable":true,"speed":2,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false,"attract":{"enable":false,"rotateX":600,"rotateY":1200}}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":false,"mode":"repulse"},"onclick":{"enable":false,"mode":"push"},"resize":true},"modes":{"grab":{"distance":400,"line_linked":{"opacity":1}},"bubble":{"distance":400,"size":40,"duration":2,"opacity":8,"speed":3},"repulse":{"distance":200,"duration":0.4},"push":{"particles_nb":4},"remove":{"particles_nb":2}}},"retina_detect":true});var count_particles, stats, update; stats = new Stats; stats.setMode(0); stats.domElement.style.position = 'absolute'; stats.domElement.style.left = '0px'; stats.domElement.style.top = '0px'; document.body.appendChild(stats.domElement); count_particles = document.querySelector('.js-count-particles'); update = function() { stats.begin(); stats.end(); if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) { count_particles.innerText = window.pJSDom[0].pJS.particles.array.length; } requestAnimationFrame(update); }; requestAnimationFrame(update);;
+</script>
+    </div>
+</body>
+</html>
