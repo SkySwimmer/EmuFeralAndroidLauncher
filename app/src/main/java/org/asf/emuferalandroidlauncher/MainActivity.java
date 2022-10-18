@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -133,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             // Start game
             try {
                 runOnUiThread(() -> {
-                    status.setText("Preparing to start the game...");
+                    status.setText("Checking fer.al app...");
                 });
 
                 Intent launch = getPackageManager().getLaunchIntentForPackage("com.WildWorks.Feral");
@@ -165,7 +166,9 @@ public class MainActivity extends AppCompatActivity {
                         // Install perms
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                             if(!getPackageManager().canRequestPackageInstalls()){
-                                Toast.makeText(getApplicationContext(), "Please enable app installation permissions, this is needed to install the modified client.", Toast.LENGTH_LONG).show();
+                                runOnUiThread(() -> {
+                                    Toast.makeText(getApplicationContext(), "Please enable app installation permissions, this is needed to install the modified client.", Toast.LENGTH_LONG).show();
+                                });
                                 startActivityForResult(new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
                                         .setData(Uri.parse(String.format("package:%s", getPackageName()))), 1);
                             }
@@ -260,6 +263,10 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
             } catch (Exception e) {
+                // Log
+                runOnUiThread(() -> {
+                    status.setText("Caught an exception:\n" + e);
+                });
             }
         }).start();
     }
